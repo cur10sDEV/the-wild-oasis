@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
 
-import useGetCabins from "./useGetCabins";
+import { useGetCabins } from "./useGetCabins";
 import toast from "react-hot-toast";
 
 const Table = styled.div`

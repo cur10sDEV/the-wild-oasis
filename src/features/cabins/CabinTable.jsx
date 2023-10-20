@@ -1,16 +1,21 @@
 import Spinner from "../../ui/Spinner";
-import CabinRow from "./CabinRow";
-
-import useGetCabins from "./useGetCabins";
-import toast from "react-hot-toast";
+import Empty from "../../ui/Empty";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
+
+import CabinRow from "./CabinRow";
+
+import { useGetCabins } from "./useGetCabins";
+
+import toast from "react-hot-toast";
 import { useSearchParams } from "react-router-dom";
 
 const CabinTable = () => {
   const { isLoading, cabins, error } = useGetCabins();
 
   const [searchParams] = useSearchParams();
+
+  if (cabins && !cabins.length) return <Empty resourceName="bookings" />;
 
   if (error) toast.error(error.message);
 
@@ -52,7 +57,7 @@ const CabinTable = () => {
           <div></div>
         </Table.Header>
         <Table.Body
-          data={filteredCabins}
+          data={sortedCabins}
           render={(cabin) => <CabinRow cabin={cabin} key={cabin.id} />}
         />
       </Table>
